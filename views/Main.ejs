@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+    *{
+        box-sizing:border-box;
+    }
+    body{
+        margin: 0;
+        font-family:;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #333;
+        overflow-x:hidden;
+    }
+
+    .v-header{
+        height:100vh;
+        display: flex;
+        align-items:center;
+        color:rgb(144, 148, 134);
+
+    }
+    .container{
+        /* max-width:960px;
+        padding-left:1rem;
+        padding-right:1rem; */
+        margin: auto;
+        text-align:center;
+    }
+    .fullscreen-video-wrap{
+        position:absolute;
+        top:0;
+        left:0;
+        width: 100%;
+        height:100vh;
+        overflow: hidden;
+    }
+    .fullscreen-video-wrap video{
+        width:100%;
+        min-height:100%;
+        object-fit: cover;
+        right:0;
+    }
+    .header-overlay{
+        height: 100vh;
+        position: absolute;
+        top:0;
+        left:0;
+        width:100vw;
+        background:#01080c;
+        z-index:1;
+        opacity: 0.70;
+    }
+    .header-content{
+        z-index: 2;
+        position:absolute;
+        margin-left:17%;
+        margin-right:30%;
+        margin-top: -3%;
+    }
+    .header-content h1{
+        font-size: 50px;
+        margin-bottom: 0;
+    }
+
+    .header-content p{
+        font-size: 1rem;
+        display: block;
+        padding-bottom: 0.5rem;
+        margin-bottom:0;
+        margin-top:0;
+    }
+    
+    .navup{
+        top:0;
+        position:absolute;
+        z-index:3;
+        width:100%;
+    }  
+     li{
+        margin:0 30px;
+    }
+    .img-cont{
+        margin:130px;
+    }
+    figure img{
+        width:250px;
+        height:250px;
+        border-radius: 10px;
+    }
+    .figure{
+        padding:10px;
+        font-weight: bolder;
+        border-radius: 10px;
+        border:1px solid rgb(122, 114, 114);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    /* @media(max-width:960px){
+        .containaer{
+            padding-right: 0;
+            padding-left: 0;
+        }
+    } */
+    #fir{
+        border: 2px solid black;
+        max-width: 360px;
+        
+    }
+    #sec{
+        border: 1.5px solid black;
+        max-width: 250px;
+    }
+
+    #third{
+        border: 1px solid black;
+        max-width: 150px;
+    }
+    form{
+        /* text-align: center;
+        padding: 50px;
+        border: 2px solid black;
+        border-radius: 5px;
+        width: fit-content;
+        height: fit-content */
+        /* border-block: inline-block; */
+        object-position: center;
+        border: 2px solid black;
+        padding: 20px;
+        border-radius: 10px;
+        width:max-content;
+    }
+    section.HideIt{
+        display: none;
+    }
+    .fontchange{
+        font-family: 'Liu Jian Mao Cao', cursive;
+        text-align: center;
+        font-weight: 700;
+        letter-spacing: 10px;
+        font-size: 5em;
+    }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!-- <p>this is it</p> -->'
+    <!-- <div class="filter">
+        <div class="filter-fir"> -->
+            <div class="navup">
+                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                      <a class="navbar-brand" href="/main">
+                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                        width="30" height="30"
+                        viewBox="0 0 172 172"
+                        style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#e67e22"><path d="M143.30467,53.17667l-51.86947,-28.81573c-1.62253,-0.88293 -3.4572,-1.4276 -5.4352,-1.4276c-1.978,0 -3.81267,0.54467 -5.4352,1.4276l-51.86947,28.81573c-3.42853,1.978 -5.762,5.64733 -5.762,9.89v80.26667c0,6.33533 5.13133,11.46667 11.46667,11.46667h103.2c6.33533,0 11.46667,-5.13133 11.46667,-11.46667v-80.26667c0,-4.24267 -2.33347,-7.912 -5.762,-9.89zM118.72013,135.92013c-2.24173,2.24173 -5.87093,2.24173 -8.10693,0l-17.2,-17.2l8.10693,-8.10693l17.2,17.2c2.24173,2.236 2.24173,5.87093 0,8.10693zM119.94707,91.27467c-5.5728,5.5728 -13.2096,7.43613 -19.21813,5.30333l-39.3364,39.3364c-2.24173,2.24173 -5.87093,2.24173 -8.10693,0c-2.24173,-2.24173 -2.24173,-5.87093 0,-8.10693l18.87413,-18.87413l-13.08347,-13.08347c-8.58853,-8.58853 -10.5436,-21.78667 -4.81027,-32.49653l31.734,31.73973l6.61627,-6.61627c-2.1328,-6.00853 -0.26947,-13.64533 5.30333,-19.21813c7.29853,-7.29853 18.14027,-8.28467 24.22333,-2.2016c6.08307,6.08307 5.09693,16.9248 -2.19587,24.2176z"></path></g></g></svg>
+                                            PlanDone
+                        </a>
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+                       <span class="navbar-toggler-icon"></span>
+                     </button>
+                     <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ml-auto">
+                             <li class="nav-item active">
+                                 <a class="nav-link" href="/main">Home <span class="sr-only">(current)</span></a>
+                             </li>
+                             <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Jump To
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                      <a class="dropdown-item" href="#imgone" value="one">Most preferred</a>
+                                      <a class="dropdown-item" href="#imgtwo" value="two">Party Clubs</a>
+                                      <a class="dropdown-item" href="#imgsixth" value="sixth">Pocket Friendly</a>
+                                      <a class="dropdown-item" href="#imgseven" value="seven">Bars</a>
+                                      <a class="dropdown-item" href="#imgeight" value="eight">Enjoy the Music</a>
+                                      <a class="dropdown-item" href="#imgnine" value="nine">Dessert</a>
+                                      <a class="dropdown-item" href="#imgelev" value="elev">Night Parties</a>
+                                      <a class="dropdown-item" href="#imgtwev" value="twev">Rooftop</a>
+                                      <a class="dropdown-item" href="#imgfift" value="fift">Buffets</a>
+                                    </div>
+                                  </li>
+                             <li class="nav-item">
+                                 <a class="nav-link" href="#filter">Apply Filter</a>
+                             </li>
+                         </ul>
+                     </div>
+                 </nav>
+                        
+             </div>
+             <header class="v-header container">
+                 <div class="fullscreen-video-wrap">
+                     <video controls autoplay loop muted>
+                         <source src="https://www.videvo.net/videvo_files/converted/2014_06/preview/Heavy_Club_Dance_Scene.mov68540.webm" type="video/webm">
+                                            
+                      </video>
+                 </div>
+                <div class="header-overlay"></div>
+                <div class="header-content">
+                    <h1>Move to the BEATS!!</h1>
+                    <p>Having trouble to find the most convenient place becuase of variations in your mood?</p>
+                    <p>Welcome to the PlanDone which avails you with a bunch of places where you can go.</p>
+                </div>
+                                
+            </header>
+<!-- HR lines -->
+            <hr id="fir">
+            <hr id="sec">
+            <hr id="third">
+
+
+<!-- filter from -->
+
+<div class="container">
+        <div class="row">
+            <div style="width:30%; margin:100px auto;">
+                    <form id="filter">
+                        <h2>Filters</h2>
+                        <p>Select filters according to your mood</p>                        
+                        <div class="form-group">
+                            <input type="radio" name="selone" id="one" class="form-control" value="one">
+                            <label for="one">Most preferred</label>
+                        </div>
+                    <div class="form-group">
+                        <input class="form-control" type="radio" name="selone" id=" two" value="two">
+                        <label for="two">Party Clubs</label>
+                    </div>
+                    <!-- <div class="form-group">
+                        <input type="radio" class="form-control" name="selone" id="three" value="three">
+                        <label for="three">Comfort Your Family</label>
+                    </div>
+                    <div class="form-group">
+                            <input type="radio" name="selone" class="form-control" id="forth" value="forth">
+                            <label for="forth">Cafe</label>
+                    </div>
+                    <div class="form-group">
+                            <label for="fifth"></label><input type="radio" name="selone" class="form-control" id="fifth" value="fifth">
+                            Formal Places</label>
+                    </div> -->
+                    <div class="form-group">
+                            <input type="radio" name="selone" class="form-control" id="sixth" value="sixth">
+                            <label for="sixth">Pocket Friendly</label>
+                    </div>
+                    <div class="form-group">
+                            <input type="radio" name="selone" class="form-control" id="seven" value="seven">
+                            <label for="seven">Bars</label>
+                    </div>
+                    <div class="form-group">
+                            <input type="radio" name="selone" class="form-control" id="eight" value="eight">
+                            <label for="eight">Enjoy the Music</label>
+                    </div>
+                    <div class="form-group">
+                            <input type="radio" name="selone" class="form-control" id="nine" value="nine">
+                            <label for="nine">Dessert</label>
+                    </div>
+                    <!-- <div class="form-group">
+                            <input type="radio" name="selone" class="form-control" id="ten" value="ten">
+                            <label for="ten">Good food</label>
+                    </div> -->
+                    <div class="form-group">
+                            <input type="radio" name="selone" class="form-control" id="elev" value="elev">
+                            <label for="elev">Night Parties</label>
+                    </div>
+                    <div class="form-group">
+                            <input type="radio" name="selone" class="form-control" id="twev" value="twev">
+                            <label for="twev">Rooftop</label>
+                    </div>
+                    <!-- <div class="form-group">
+                            <input type="radio" name="selone" class="form-control" id="thir" value="thir">
+                            <label for="thir">Pure Veg</label>
+                    </div>
+                    <div class="form-group">
+                            <input type="radio" name="selone" class="form-control" id="fort" value="fort">
+                            <label for="fort">Non-veg</label>
+                    </div> -->
+                    <div class="form-group">
+                            <input type="radio" name="selone" class="form-control" id="fift" value="fift">
+                            <label for="fift">Buffets</label>
+                    </div>
+
+            </form>
+            </div>
+            </div>
+            </div>
+
+
+<!-- add restaurents and clubs!! -->
+
+
+<!-- Higherst rating clubs -->
+            <section class="HideIt" id="imgone">
+                <h1 class="fontchange">Gems</h1>
+                    <div class="img-cont">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <figure class="figure">
+                                        <a href="/Boulevard"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/s/k/p46799-15358713835b8b89976f59f.jpg?tr=tr:n-medium"></a>
+                                        <figcaption class="figure-caption">26 Boulevard</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <figure class="figure">
+                                         <a href="/Social"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/s/k/p46799-15358713835b8b89976f59f.jpg?tr=tr:n-medium"></a>
+                                         <figcaption class="figure-caption">Social</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <figure class="figure">                                         
+                                        <a href="/Beach"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/5/u/t/p50330-15643011445d3d5758aad20.jpg?tr=tr:n-medium"></a>                                         
+                                        <figcaption class="figure-caption">Beach N Brew</figcaption>                                     
+                                    </figure>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                         <figure class="figure">
+                                             <a href="/Molecule"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/5/c/x/p50345-15643121645d3d82642dcde.jpg?tr=tr:n-medium"></a>
+                                             <figcaption class="figure-caption">Molecule Air Bar</figcaption>                                     
+                                        </figure>
+                                </div>                   
+                            </div>
+                            <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                         <figure class="figure">                                         
+                                            <a href="/GT"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/c/u/p48848-15420233095be9688d0e792.jpg?tr=tr:n-medium"></a>                                         
+                                             <figcaption class="figure-caption">The G.T. Road</figcaption>                                     
+                                        </figure>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                             <figure class="figure">                                         
+                                                <a href="/MOBE"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/q/j/p46711-15420272095be977c9967d6.jpg?tr=tr:n-large"></a>                                         
+                                                <figcaption class="figure-caption">MOBE</figcaption>                                     
+                                            </figure>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                             <figure class="figure">                                         
+                                                 <a href="/Brew"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFpwlILfDHwrl8qWzDbSturNWN3kCfm2BjoVBspDfNuynEeE0MRA&s"></a>                                         
+                                                <figcaption class="figure-caption">The Brew Estate</figcaption>                                     
+                                            </figure>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                             <figure class="figure">                                         
+                                                <a href="/Safe"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/5/q/c/p51870-15481506985c46e7aa9790b.jpg?tr=tr:n-medium"></a>                                         
+                                                 <figcaption class="figure-caption">The Safehouse</figcaption>                                     
+                                            </figure>
+                                    </div>                   
+                                </div>
+                        </div>
+            </section>
+            
+<!--2. Party stuff -->
+<section class="HideIt" id="imgtwo">
+        <h1 class="fontchange">Show some Moves!!</h1>
+            <div class="img-cont">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">
+                                <a href="/Qizo"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/w/q/p47516-15449676315c1655cfb1755.jpg?tr=tr:n-xlarge"></a>
+                                <figcaption class="figure-caption">Qizo</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">
+                                 <a href="/Social"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/s/k/p46799-15358713835b8b89976f59f.jpg?tr=tr:n-medium"></a>
+                                 <figcaption class="figure-caption">Social</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">                                         
+                                <a href="/FLYP"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/n/b/p46746-15361496875b8fc8b7e03ad.jpg?tr=tr:n-small"></a>                                         
+                                <figcaption class="figure-caption">FLYP</figcaption>                                     
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                 <figure class="figure">
+                                     <a href="/Molecule"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/5/c/x/p50345-15643121645d3d82642dcde.jpg?tr=tr:n-medium"></a>
+                                     <figcaption class="figure-caption">Molecule Air Bar</figcaption>                                     
+                                </figure>
+                        </div>                   
+                    </div>
+                    <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                 <figure class="figure">                                         
+                                     <a href="/Pyramid"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/s/f/p46755-15357035485b88f9fc3193b.jpg?tr=tr:n-xlarge"></a>                                         
+                                     <figcaption class="figure-caption">The Pyramid</figcaption>                                     
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                            <a href="/MOBE"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/q/j/p46711-15420272095be977c9967d6.jpg?tr=tr:n-large"></a>                                         
+                                        <figcaption class="figure-caption">MOBE</figcaption>                                     
+                                    </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                            <a href="/Brew"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFpwlILfDHwrl8qWzDbSturNWN3kCfm2BjoVBspDfNuynEeE0MRA&s"></a>                                       
+                                        <figcaption class="figure-caption">The Brew Estate</figcaption>                                     
+                                    </figure>
+                            </div>                 
+                        </div>
+                </div>
+    </section>
+    
+
+<!-- 3. family dinner -->
+<!-- 
+<section class="HideIt" id="imgthree">
+        <h1 class="fontchange">Behave Decent!!</h1>
+            <div class="img-cont">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">
+                                <img src="">
+                                <figcaption class="figure-caption"></figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">
+                                 <img src="">
+                                 <figcaption class="figure-caption"></figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">                                         
+                                <img src="">                                         
+                                <figcaption class="figure-caption"></figcaption>                                     
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                 <figure class="figure">
+                                     <img src="">
+                                     <figcaption class="figure-caption"></figcaption>                                     
+                                </figure>
+                        </div>                   
+                    </div>
+                    <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                 <figure class="figure">                                         
+                                     <img src="">                                         
+                                     <figcaption class="figure-caption"></figcaption>                                     
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                         <img src="">                                         
+                                         <figcaption class="figure-caption"></figcaption>                                     
+                                    </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                         <img src="">                                         
+                                         <figcaption class="figure-caption"></figcaption>                                     
+                                    </figure>
+                            </div>                 
+                        </div>
+                </div>
+    </section> -->
+<!-- 4. Cafes -->
+<!-- 
+<section class="HideIt" id="imgforth">
+        <h1 class="fontchange">Snacks Time!!</h1>
+            <div class="img-cont">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">
+                                <img src="">
+                                <figcaption class="figure-caption"></figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">
+                                 <img src="">
+                                 <figcaption class="figure-caption"></figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">                                         
+                                <img src="">                                         
+                                <figcaption class="figure-caption"></figcaption>                                     
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                 <figure class="figure">
+                                     <img src="">
+                                     <figcaption class="figure-caption"></figcaption>                                     
+                                </figure>
+                        </div>                   
+                    </div>
+                    <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                 <figure class="figure">                                         
+                                     <img src="">                                         
+                                     <figcaption class="figure-caption"></figcaption>                                     
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                         <img src="">                                         
+                                         <figcaption class="figure-caption"></figcaption>                                     
+                                    </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                         <img src="">                                         
+                                         <figcaption class="figure-caption"></figcaption>                                     
+                                    </figure>
+                            </div>                 
+                        </div>
+                </div>
+    </section> -->
+<!-- 5. collegue dinner -->
+
+<!-- <section class="HideIt" id="imgfifth">
+        <h1 class="fontchange"></h1>
+            <div class="img-cont">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">
+                                    <a href="/Qizo"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/w/q/p47516-15449676315c1655cfb1755.jpg?tr=tr:n-xlarge"></a>
+                                <figcaption class="figure-caption">Qizo</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">
+                                 <a href="/Social"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/s/k/p46799-15358713835b8b89976f59f.jpg?tr=tr:n-medium"></a>
+                                 <figcaption class="figure-caption">Social</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">                                         
+                                    <a href="/FLYP"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/n/b/p46746-15361496875b8fc8b7e03ad.jpg?tr=tr:n-small"></a>
+                                <figcaption class="figure-caption">FLYP</figcaption>                                     
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                 <figure class="figure">
+                                     <a href="/Molecule"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/5/c/x/p50345-15643121645d3d82642dcde.jpg?tr=tr:n-medium"></a>
+                                     <figcaption class="figure-caption">Molecule Air Bar</figcaption>                                     
+                                </figure>
+                        </div>                   
+                    </div>
+                    <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                 <figure class="figure">                                         
+                                        <a href="/Pyramid"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/s/f/p46755-15357035485b88f9fc3193b.jpg?tr=tr:n-xlarge"></a>
+                                     <figcaption class="figure-caption">The Pyramid</figcaption>                                     
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                            <a href="/MOBE"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/q/j/p46711-15420272095be977c9967d6.jpg?tr=tr:n-large"></a>                                         
+                                         <figcaption class="figure-caption">MOBE</figcaption>                                     
+                                    </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                            <a href="/Brew"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFpwlILfDHwrl8qWzDbSturNWN3kCfm2BjoVBspDfNuynEeE0MRA&s"></a>                                        
+                                         <figcaption class="figure-caption">The Brew Estate</figcaption>                                     
+                                    </figure>
+                            </div>                 
+                        </div>
+                </div>
+    </section> -->
+
+    <!-- 6. pocket Friendly -->
+    <section class="HideIt" id="imgsixth">
+            <h1 class="fontchange">Ease to Loose Your Pocket!!</h1>
+                <div class="img-cont">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <figure class="figure">
+                                    <a href="/Uncle"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/w/q/p47516-15449676315c1655cfb1755.jpg?tr=tr:n-xlarge"></a>
+                                    <figcaption class="figure-caption">Uncle Zack's</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <figure class="figure">
+                                     <a href="/Social"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/s/k/p46799-15358713835b8b89976f59f.jpg?tr=tr:n-medium"></a>
+                                     <figcaption class="figure-caption">Social</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <figure class="figure">                                         
+                                    <a href="Petu"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/n/b/p46746-15361496875b8fc8b7e03ad.jpg?tr=tr:n-small"></a>                                         
+                                    <figcaption class="figure-caption">Petu Pankaj</figcaption>                                     
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">
+                                        <a href="/Wong"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/5/c/x/p50345-15643121645d3d82642dcde.jpg?tr=tr:n-medium"></a>
+                                         <figcaption class="figure-caption">Mrs. wong's</figcaption>                                     
+                                    </figure>
+                            </div>                   
+                        </div>
+                        <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                        <a href="/Smaaash"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/s/f/p46755-15357035485b88f9fc3193b.jpg?tr=tr:n-xlarge"></a>                                         
+                                         <figcaption class="figure-caption">Smaaash</figcaption>                                     
+                                    </figure>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                         <figure class="figure">                                         
+                                             <a href="TBP"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu8-FODaIoKpTWZW5MSVthxEjDZ2B27B54eI9nSkPmqVFNujka&s"></a>                                         
+                                             <figcaption class="figure-caption">The Barbeque Paradise</figcaption>                                     
+                                        </figure>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                         <figure class="figure">                                         
+                                            <a href="/Gopal"><img src="https://b.zmtcdn.com/data/pictures/7/120707/3099bcf265b9bd4ce6f486acea465820.jpg?impolicy=newcropandfit&cropw=3456&croph=3456&cropoffsetx=0&cropoffsety=1152&cropgravity=NorthWest&fitw=200&fith=200&fittype=ignore"></a>
+                                             <figcaption class="figure-caption">Gopal's</figcaption>                                     
+                                        </figure>
+                                </div>                 
+                            </div>
+                    </div>
+        </section>
+    <!-- 7. bars -->
+    <section class="HideIt" id="imgseven">
+            <h1 class="fontchange">Cheers Guys!!</h1>
+                <div class="img-cont">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <figure class="figure">
+                                    <a href="/Rebelle"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/p/k/p46719-15376361625ba6774205413.jpg?tr=tr:n-medium"></a>
+                                    <figcaption class="figure-caption">Rebelle Bar & Kitchen</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <figure class="figure">
+                                     <a href="/Culture"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/n/i/p46789-15376287565ba65a544deea.jpg?tr=tr:n-medium"></a>
+                                     <figcaption class="figure-caption">Culture Brew exchange</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <figure class="figure">                                         
+                                    <a href="/Pipe"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/q/p/p46767-15379584025bab6202282d8.jpg?tr=tr:n-medium"></a>
+                                    <figcaption class="figure-caption">Pipe and Barrel </figcaption>                                     
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">
+                                            <a href="/MOBE"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/q/j/p46711-15420272095be977c9967d6.jpg?tr=tr:n-large"></a>                                         
+                                         <figcaption class="figure-caption">Ministry of Bar Exchange</figcaption>                                     
+                                    </figure>
+                            </div>                   
+                        </div>
+                        <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                            <a href="/Brew"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFpwlILfDHwrl8qWzDbSturNWN3kCfm2BjoVBspDfNuynEeE0MRA&s"></a>                                        
+                                         <figcaption class="figure-caption">The Brew Estate</figcaption>                                     
+                                    </figure>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                         <figure class="figure">                                         
+                                             <a href="/Boat"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/k/w/p46798-15358705565b8b865c9b290.jpg?tr=tr:n-medium"></a>
+                                             <figcaption class="figure-caption">Boathouse</figcaption>                                     
+                                        </figure>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                        <figure class="figure">                                         
+                                           <a href="/Great"><img src="https://www.loofre.com/eatopia/wp-content/uploads/2018/02/Screenshot_20180208-130638_01.jpg"></a> 
+                                            <figcaption class="figure-caption">The Great Bear Kitchen & Microbrewery</figcaption>                                     
+                                       </figure>
+                               </div>
+                            </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <figure class="figure">
+                                        <a href="/Books"><img src="https://reseuro.magzter.com/1124x660/articles/6446/184841/57eb90679e286/A-Break-in-the-Blas-Visiting-Books-N-Brew.jpg"></a>
+                                        <figcaption class="figure-caption">Books and Brew</figcaption>
+                                        </figure>
+                                    </div>
+
+                    </div>
+        </section>
+    
+    <!-- 8. enjoy the music -->
+
+    <section class="HideIt" id="imgeight">
+            <h1 class="fontchange">Show some moves!!</h1>
+                <div class="img-cont">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <figure class="figure">
+                                        <a href="/Pyramid"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/s/f/p46755-15357035485b88f9fc3193b.jpg?tr=tr:n-xlarge"></a>
+                                    <figcaption class="figure-caption">Pyramid</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <figure class="figure">
+                                     <a href="/Social"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/s/k/p46799-15358713835b8b89976f59f.jpg?tr=tr:n-medium"></a>
+                                     <figcaption class="figure-caption">Social</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                <figure class="figure">                                         
+                                        <a href="/FLYP"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/n/b/p46746-15361496875b8fc8b7e03ad.jpg?tr=tr:n-small"></a>
+                                    <figcaption class="figure-caption">FLYP</figcaption>                                     
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">
+                                            <a href="/Qizo"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/w/q/p47516-15449676315c1655cfb1755.jpg?tr=tr:n-xlarge"></a>
+                                         <figcaption class="figure-caption">Qizo</figcaption>                                     
+                                    </figure>
+                            </div>                   
+                        </div>
+                        <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                        <a href="/Paara"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRALoEPGVlJcCTHnIOJOdKcTUzb11selnU1gd0absPo7-YPBHUj"></a>
+                                         <figcaption class="figure-caption">Paara</figcaption>                                     
+                                    </figure>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                         <figure class="figure">                                         
+                                            <a href="/Tamzaraa"><img src="https://img4.nbstatic.in/tr:w-500/5bee7d355f1503000d65c0e7.jpg"></a>
+                                             <figcaption class="figure-caption">Tamzaraa Club</figcaption>                                     
+                                        </figure>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                         <figure class="figure">                                         
+                                             <a href="/Poison"><img src="https://www.shoutlo.com/uploads/articles/header-img-poison-lounge-bar-and-grill-chandigarh.jpg"></a>  
+                                             <figcaption class="figure-caption">Poison</figcaption>                                     
+                                        </figure>
+                                </div>                 
+                            </div>
+                    </div>
+        </section>
+    
+<!-- Night parties -->
+
+<section class="HideIt" id="imgelev">
+        <h1 class="fontchange">Have Fun Tonight!!</h1>
+            <div class="img-cont">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">
+                                <a href="/Social"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/s/k/p46799-15358713835b8b89976f59f.jpg?tr=tr:n-medium"></a>
+                                <figcaption class="figure-caption">Social</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">
+                                 <a href="/Horse"><img src="https://b.zmtcdn.com/data/pictures/8/18634628/b6193263fb5f6a66fd9dbe67fc27c18d.jpg?impolicy=newcropandfit&cropw=500&croph=500&cropoffsetx=272&cropoffsety=0&cropgravity=NorthWest&fitw=200&fith=200&fittype=ignore"></a>
+                                 <figcaption class="figure-caption">The Horseshoe Bar Exchange</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">                                         
+                                    <a href="/Escape"> <img src="https://img.scoop.it/fdzJtOEIlPHVZt56AM_wqzl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"></a>
+                                <figcaption class="figure-caption">Escape</figcaption>                                     
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                 <figure class="figure">
+                                     <img src="https://content3.jdmagicbox.com/comp/remote/l6/0172px172.x172.180320174525.d2l6/catalogue/highway-flavours-panchkula-restaurants-rr2azgzv2o.jpg">
+                                     <figcaption class="figure-caption">The Highway Flavours</figcaption>                                     
+                                </figure>
+                        </div>                   
+                    </div>
+                    <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                 <figure class="figure">                                         
+                                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf4isD2QJfUQ2ZEjNfa4aw_V_tB9A5WeVkn0vWLv6iBNzT6jvDXg&s">                                         
+                                     <figcaption class="figure-caption">Hot Shots</figcaption>                                     
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                            <a href="/Boat"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/k/w/p46798-15358705565b8b865c9b290.jpg?tr=tr:n-medium"></a>
+                                         <figcaption class="figure-caption">Boathouse</figcaption>                                     
+                                    </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                         <img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/g/w/p48510-15656034115d5136536aa72.jpg?tr=tr:n-medium">                                         
+                                         <figcaption class="figure-caption">Playground</figcaption>                                     
+                                    </figure>
+                            </div> 
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <figure class="figure">                                         
+                                        <img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/1/v/k/p17070-15645653455d415f610f623.jpg?tr=tr:n-xlarge">                                         
+                                        <figcaption class="figure-caption">10 Downing Street</figcaption>                                     
+                                   </figure>
+                           </div>                 
+                        </div>
+                        <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCI5nlLtJCcrY7S9idHzuB6UoCh1f3YmUVBw6kLTZmMC6IIuaJ_Q&s">                                         
+                                         <figcaption class="figure-caption">Peddlers</figcaption>                                     
+                                     </figure>
+                                 </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <figure class="figure">                                         
+                                            <a href="/FLYP"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/n/b/p46746-15361496875b8fc8b7e03ad.jpg?tr=tr:n-small"></a>
+                                        <figcaption class="figure-caption">MTV Flyp</figcaption>                                     
+                                    </figure>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <figure class="figure">                                         
+                                            <a href="/Great"><img src="https://www.loofre.com/eatopia/wp-content/uploads/2018/02/Screenshot_20180208-130638_01.jpg"></a> 
+                                        <figcaption class="figure-caption">The Great Bear Kitchn & Microbrewery</figcaption>                                     
+                                    </figure>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                        <figure class="figure">                                         
+                                            <img src="https://b.zmtcdn.com/data/reviews_photos/ecc/a18035a502f5dc4bc52d060a128f1ecc_1534787781.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A">                                         
+                                            <figcaption class="figure-caption">The Stage</figcaption>                                     
+                                        </figure>
+                                    </div>                 
+                            </div>
+                </div>
+    </section>
+
+<!-- Rooftoop -->
+
+<section class="HideIt" id="imgtwev">
+        <h1 class="fontchange">Rooftop... Beneath the Stars!!</h1>
+            <div class="img-cont">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">
+                                   <a href="/Horse"><img src="https://b.zmtcdn.com/data/pictures/8/18634628/b6193263fb5f6a66fd9dbe67fc27c18d.jpg?impolicy=newcropandfit&cropw=500&croph=500&cropoffsetx=272&cropoffsety=0&cropgravity=NorthWest&fitw=200&fith=200&fittype=ignore"></a>
+                                <figcaption class="figure-caption">The Horseshoe Bar Exchange</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">
+                                <a href="/Escape"> <img src="https://img.scoop.it/fdzJtOEIlPHVZt56AM_wqzl72eJkfbmt4t8yenImKBVvK0kTmF0xjctABnaLJIm9"></a>
+                                 <figcaption class="figure-caption">Escape</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">                                         
+                                <a href="/Boulevard"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/s/k/p46799-15358713835b8b89976f59f.jpg?tr=tr:n-medium"></a>                                         
+                                <figcaption class="figure-caption">26 Boulevard</figcaption>                                     
+                            </figure>
+                        </div>                 
+                    </div>
+                </div>
+    </section>
+
+<!-- Buffets -->
+
+<section class="HideIt" id="imgfift">
+        <h1 class="fontchange">Eat Eat N Eat!!</h1>
+            <div class="img-cont">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">
+                                    <a href="/GT"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/c/u/p48848-15420233095be9688d0e792.jpg?tr=tr:n-medium"></a>
+                                <figcaption class="figure-caption">The G.T. Road</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">
+                                    <a href="/Smaaash"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/s/f/p46755-15357035485b88f9fc3193b.jpg?tr=tr:n-xlarge"></a>
+                                 <figcaption class="figure-caption">Smaaash</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                            <figure class="figure">                                         
+                               <a href="/Nation"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/5/p/b/p5520-15420185925be956202715e.jpg?tr=tr:n-xlarge"></a> 
+                                <figcaption class="figure-caption">Barbeque Nation</figcaption>                                     
+                            </figure>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                 <figure class="figure">
+                                        <a href="/Pyramid"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/s/f/p46755-15357035485b88f9fc3193b.jpg?tr=tr:n-xlarge"></a>
+                                     <figcaption class="figure-caption">Pyramid</figcaption>                                     
+                                </figure>
+                        </div>                   
+                    </div>
+                    <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                 <figure class="figure">                                         
+                                        <a href="TBP"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu8-FODaIoKpTWZW5MSVthxEjDZ2B27B54eI9nSkPmqVFNujka&s"></a>
+                                     <figcaption class="figure-caption">Barbeque Paradise</figcaption>                                     
+                                </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                        <a href="/Urban"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/3/h/v/p31150-15383695685bb1a820146ad.jpg?tr=tr:n-xlarge"></a> 
+                                         <figcaption class="figure-caption">Urban Cafe</figcaption>                                     
+                                    </figure>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                     <figure class="figure">                                         
+                                        <a href="/Golden"><img src="https://pix10.agoda.net/hotelImages/113844/0/4e6954c5b3bc49ee0a5cc59cfec5a456.jpg?s=1024x768"></a>
+                                         <figcaption class="figure-caption">Golden Tulip</figcaption>                                     
+                                    </figure>
+                            </div>                 
+                        </div>
+                        <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <figure class="figure">
+                                        <a href="/Katani"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTofaK6Xgpcv05v6okkcn2Yvajuh-C-zhbcndy3EO_wxXnMxefp"></a>
+                                        <figcaption class="figure-caption">Katani Vaishno Dhaba</figcaption>
+                                    </figure>
+                                </div>
+                        </div>
+                </div>
+    </section>
+
+<!-- Dessert types -->
+
+<section class="HideIt" id="imgnine">
+        <h1 class="fontchange">Go run for some Sweet Memories!!</h1>
+            <div class="img-cont">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-3">
+                                <figure class="figure">
+                                        <a href="/Queen"><img src="https://cdn.shoutlo.com/uploads/media/its-waffle-time-1504783154.jpeg"></a>
+                                        <figcaption class="figure-caption">Waffle Queen</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <figure class="figure">
+                                         <a href="/Nik"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/1/i/o/p1571-15433850525bfe2fdc8fbca.jpg?tr=tr:n-xlarge"></a>
+                                         <figcaption class="figure-caption">Nik Bakers</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <figure class="figure">                                         
+                                        <a href="/Churiosity"><img src="https://i0.wp.com/tricitylive.in/wp-content/uploads/2018/08/Churiosity-sector8-tricitry-live-chandigarh-tricity.jpg?resize=1170%2C781">          </a>                               
+                                        <figcaption class="figure-caption">Churiosity</figcaption>                                     
+                                    </figure>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                         <figure class="figure">
+                                                <a href="/Uncle"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/w/q/p47516-15449676315c1655cfb1755.jpg?tr=tr:n-xlarge"></a>
+                                             <figcaption class="figure-caption">Uncle Jack's</figcaption>                                     
+                                        </figure>
+                                </div>                   
+                            </div>
+                            <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                             <figure class="figure">                                         
+                                                 <a href="/Desserted"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/i/a/p4711-15387375915bb745b7e8b34.jpg?tr=tr:n-medium"> </a>                                        
+                                                 <figcaption class="figure-caption">Get Desserted</figcaption>                                     
+                                            </figure>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                             <figure class="figure">                                         
+                                                 <a href="/Room"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/4/u/f/p46745-15630041905d298d1e7b3a1.jpg?tr=tr:n-medium"></a>                                         
+                                                 <figcaption class="figure-caption">The Chocolate Room</figcaption>                                     
+                                            </figure>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-3">
+                                            <figure class="figure">                                         
+                                                <a href="/Daddy"><img src="https://im1.dineout.co.in/images/uploads/restaurant/sharpen/5/x/v/p55485-15553294745cb471c279467.jpg?tr=tr:n-medium"> </a>                                        
+                                                <figcaption class="figure-caption">Daddy Waffle</figcaption>                                     
+                                           </figure>
+                           </div>                 
+                        </div>
+                </div>
+    </section>
+
+<!-- JQUERY SCRIPTING -->
+    <script>
+        $(document).ready(function(){
+            var abcd="";
+            $("input[type='radio']").click(function(){
+                var test=$(this).val();
+                $("#img"+test).show();
+                $("section").not("#img"+test).hide();
+                // abcd+=test;
+                // console.log(abcd);
+            });
+            $("#navbarDropdown").click(function(){
+                $("section.HideIt").show();
+            });
+
+            
+
+        });
+    </script>
+</body>
+</html>

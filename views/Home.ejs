@@ -1,0 +1,54 @@
+<!DOCTYPE html><html>
+    <head>
+        <title>
+
+        </title>
+           <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+           <style>
+                form{
+                    border-block: inline-block;
+                    border: 2px solid black;
+                    padding: 20px;
+                    border-radius: 10px;
+                }
+                button{
+                    position: relative;
+    
+                }
+                p{
+                    margin: 0px auto;
+                }
+                a{
+                    margin:0px auto;
+                }
+                body{
+                    background-repeat:no-repeat;
+                    background-size:cover;
+                    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSIIVGTQ_kwhKmSNJs-ngBihsoiMBFsm8XlyLcwR_AjNlBxHb5x");
+                    height:100vh;
+                }
+            </style>
+        </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div style="width:30%; margin:100px auto;">
+                        <form method="POST" action="/main">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="username" placeholder="Enter your name" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="password" name="password" placeholder="Enter your password" maxlength="15" minlength="6" required>
+                            </div>
+                            <div class="form-group">
+                            <button value="Submit" class="form-control btn btn-primary btn-md" style="margin:0 auto">Submit</button>
+                            </div>
+                            <div class="form-group">
+                                <p style="font-size: 0.8em">If not registered??</p>
+                                <a href="/register" style="font-size: 0.8em" >Register here</a>
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </html>
